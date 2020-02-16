@@ -1,0 +1,113 @@
+
+
+
+<html>
+<head>
+
+<link href ="/basics/basicquiz/assets/style.css" rel ="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<script src = "/basics/basicquiz/views/main.js"></script>
+
+</head>
+
+
+
+
+
+<body>
+
+    <h1 class="mt-4">Welcome <%= user.name %></h1>
+    <h2 class="lead mb-3">All the best!</h2>
+
+    
+    <form id = "quiz" name = "quiz" action="/users/login" method="POST">
+    
+    
+    <p class = "questions">1 What is JS?</p>
+    <input id = "textbox" type = "text" name = "question1">
+    <br></br> 
+
+    <p class = "questions">2 What is CSS?</p>
+    <input type = "radio" id = "mc" name = "question2" value = "answer1"> Cascaded Style Sheet<br>
+    <input type = "radio" id = "mc" name = "question2" value = "answer2"> Core Styling Sheet<br>
+     <br></br> 
+
+    <p class = "questions">3 What is HTML?</p>
+    <input type = "radio" id = "mc" name = "question3" value = "answer1"> HyperTextMarkupLanguage<br>
+    <input type = "radio" id = "mc" name = "question3" value = "answer2"> HypedTextMadeLanguage<br>
+    <br></br> 
+    
+    <input id = "button" type = "button" value = "I'm finished!" onclick = "check();">
+    <br></br> 
+    
+    </form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<script>
+    function check(){
+
+        var question1 = document.quiz.question1.value;
+        var question2 = document.quiz.question2.value;
+        var question3 = document.quiz.question3.value;
+        var correct = 0;
+    
+    
+        if (question1 == "JavaScript") {
+            correct++;
+    }
+        if (question2 == "answer1") {
+            correct++;
+    }	
+        if (question3 == "answer1") {
+            correct++;
+        }
+        
+        var pictures = ["/basics/basicquiz/assets/win.gif", "/basics/basicquiz/assets/meh.jpeg", "/basics/basicquiz/assets/lose.gif"];
+        var messages = ["Great job!", "That's just okay", "You really need to do better"];
+        var score;
+    
+        if (correct == 0) {
+            score = 2;
+        }
+    
+        if (correct > 0 && correct < 3) {
+            score = 1;
+        }
+    
+        if (correct == 3) {
+            score = 0;
+        }
+    
+        document.getElementById("after_submit").style.visibility = "visible";
+    
+        document.getElementById("message").innerHTML = messages[score];
+        document.getElementById("number_correct").innerHTML = "You got " + correct + " correct.";
+        document.getElementById("picture").src = pictures[score];
+        }
+
+</script>
+    
+    
+    
+    <div id = "after_submit">
+        <p id = "number_correct"></p>
+        <p id = "message"></p>
+        <img id = "picture">
+        </div>
+    
+    
+
+    <a href="/users/logout" class="btn btn-secondary">Logout</a>
+
+    
+
+    
